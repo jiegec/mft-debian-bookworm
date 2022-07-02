@@ -1,0 +1,11 @@
+--- mst_pciconf.c	2022-05-31 19:30:52.000000000 +0800
++++ mst_pciconf.c	2022-07-02 21:01:21.967127273 +0800
+@@ -598,7 +598,7 @@
+     int i = 0;
+     for (i = 0; i < MST_DMA_END; i++) {
+         if (dev->dma_props[i].mem_pa) {
+-            pci_unmap_single(dev->pci_dev, dev->dma_props[i].dma_map, DMA_MBOX_SIZE, DMA_BIDIRECTIONAL);
++            dma_unmap_single(&dev->pci_dev->dev, dev->dma_props[i].dma_map, DMA_MBOX_SIZE, DMA_BIDIRECTIONAL);
+             kfree(dev->dma_props[i].mem_pa);
+             dev->dma_props[i].mem_pa = NULL;
+         }
